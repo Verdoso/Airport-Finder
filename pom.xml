@@ -23,7 +23,7 @@
     <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
     <m2e.apt.activation>jdt_apt</m2e.apt.activation>
     <summer.version>0.11.4</summer.version>
-    <geoip2.version>2.12.0</geoip2.version>
+    <geoip2.version>2.15.0</geoip2.version>
   </properties>
   <dependencies>
     <dependency>
@@ -82,6 +82,10 @@
       <version>${geoip2.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>

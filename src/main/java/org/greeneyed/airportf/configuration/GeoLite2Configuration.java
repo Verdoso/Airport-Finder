@@ -1,30 +1,31 @@
 package org.greeneyed.airportf.configuration;
 
-import java.io.InputStream;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.annotation.Validated;
 
-import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.WebServiceClient;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
 
 @Configuration
-@Slf4j
+@ConfigurationProperties(prefix = "geoip2")
+@Validated
+@Data
 public class GeoLite2Configuration {
-    // Source: https://dev.maxmind.com/geoip/geoip2/geolite2/#Databases
-    private final static String COUNTRIES_DB_NAME = "data/GeoLite2-City.mmdb";
+
+    @NotNull
+    private Integer accountId;
+
+    @NotBlank
+    private String licenseKey;
 
     @Bean
-    public DatabaseReader buildDatabaseReader() {
-        log.info("Building GeoLite2 city database");
-        try (InputStream inputStream = ClassLoader.getSystemResourceAsStream(COUNTRIES_DB_NAME)) {
-            DatabaseReader dbReader = new DatabaseReader.Builder(inputStream).build();
-            log.info("GeoLite2 cities database initialised");
-            return dbReader;
-        } catch (Exception e) {
-            log.error("Error initialising GeoLite2 cities database from file", e);
-        }
-        return null;
+    public WebServiceClient buildWebServiceClient() {
+        return new WebServiceClient.Builder(accountId, licenseKey).host("geolite.info") .build();
     }
 }
