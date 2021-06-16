@@ -200,7 +200,7 @@
             <image>adoptopenjdk/openjdk16</image>
           </from>
           <container>
-            <ports>8080</ports>
+            <ports>9999</ports>
           </container>
           <to>
             <image>verdoso/${project.artifactId}:v${project.version}</image>

@@ -36,7 +36,7 @@ public class LocatorController {
         this.ipLocatorService = ipLocatorService;
     }
 
-    // Ej: http://localhost:8080/locate/39.577251/2.633764/
+    // Ej: http://localhost:9999/locate/39.577251/2.633764/
     @RequestMapping(value = "/locate/{latitude}/{longitude}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIAirportsResponse> locate(@PathVariable(value = "latitude") double latitude,
             @PathVariable(value = "longitude") double longitude,
@@ -48,7 +48,7 @@ public class LocatorController {
                 HttpStatus.OK);
     }
 
-    // Ej: http://localhost:8080/locate_by_ip/67.218.243.47/
+    // Ej: http://localhost:9999/locate_by_ip/67.218.243.47/
     @RequestMapping(value = "/locate_by_ip/{ip}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIAirportsResponse> locateByIP(@PathVariable(value = "ip") String ip,
             @RequestParam(value = "limitKm", required = false, defaultValue = "300") long limitKm,
