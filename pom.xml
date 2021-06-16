@@ -203,14 +203,14 @@
             <ports>9999</ports>
           </container>
           <to>
-            <image>verdoso/${project.artifactId}:v${project.version}</image>
+            <image>docker.io/verdoso/${project.artifactId}:v${project.version}</image>
           </to>
         </configuration>
         <executions>
           <execution>
             <phase>package</phase>
             <goals>
-              <goal>dockerBuild</goal>
+              <goal>build</goal>
             </goals>
           </execution>
         </executions>
