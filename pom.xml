@@ -125,10 +125,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-        <source>16</source>
-        <target>16</target>
-        <fork>true</fork>
-        <compilerArgs>
+          <source>16</source>
+          <target>16</target>
+          <fork>true</fork>
+          <compilerArgs>
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
@@ -139,11 +139,11 @@
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED</arg>
-        </compilerArgs>
-        <annotationProcessorPaths>
+          </compilerArgs>
+          <annotationProcessorPaths>
             <path>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
               <version>${lombok.version}</version>
             </path>
             <path>
@@ -191,6 +191,29 @@
         <configuration>
           <tag>v${project.version}</tag>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <from>
+            <image>adoptopenjdk/openjdk16</image>
+          </from>
+          <container>
+            <ports>8080</ports>
+          </container>
+          <to>
+            <image>verdoso/${project.artifactId}:v${project.version}</image>
+          </to>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>dockerBuild</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
