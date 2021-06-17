@@ -10,3 +10,6 @@ management:
          exposure:
             include: health,info,env,mappings,refresh,loggers,configInspector,configprops,actuators
 logging.config: classpath:log4j2-spring.xml
+summer:
+  docker_secrets:
+    enabled: true
