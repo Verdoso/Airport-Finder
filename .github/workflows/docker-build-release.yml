@@ -51,6 +51,7 @@ jobs:
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_VERSION: $(cat RELEASE_VERSION)
       with:
         tag_name: Release_Tag_v.${{ env.RELEASE_VERSION }}
         release_name: Release ${{ env.RELEASE_VERSION }}
