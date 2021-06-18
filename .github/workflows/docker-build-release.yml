@@ -32,5 +32,5 @@ jobs:
          echo "PROJECT_VERSION=${PROJECT_VERSION}"
          echo "CLEAN_PROJECT_VERSION=${PROJECT_VERSION%-SNAPSHOT}"
          CLEAN_PROJECT_VERSION=`echo "${PROJECT_VERSION%-SNAPSHOT}"`
-         cat "${CLEAN_PROJECT_VERSION}" > RELEASE_VERSION
+         echo "${CLEAN_PROJECT_VERSION}" >> RELEASE_VERSION
          echo "Generating release from version $(cat RELEASE_VERSION)"
