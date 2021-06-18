@@ -12,8 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
     - name: Set up JDK 16
-    - uses: joschi/setup-jdk@v2
+      uses: joschi/setup-jdk@v2
       with:
         java-version: 16
 
