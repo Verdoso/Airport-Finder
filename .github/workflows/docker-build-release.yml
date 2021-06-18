@@ -12,8 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 1.16
-      uses: actions/setup-java@v1
+    
+    - name: Set up JDK 16
+      uses: joschi/setup-jdk@v2
       with:
         java-version: 16
 
@@ -27,20 +28,23 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-         PROJECT_VERSION=`mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive  exec:exec`
+         PROJECT_VERSION=`mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -DforceStdout`
+         echo "PROJECT_VERSION=${PROJECT_VERSION}"
+         echo "CLEAN_PROJECT_VERSION=${PROJECT_VERSION%-SNAPSHOT}"
          CLEAN_PROJECT_VERSION=`echo "${PROJECT_VERSION%-SNAPSHOT}"`
-         echo "RELEASE_VERSION=${CLEAN_PROJECT_VERSION}" >> $GITHUB_ENV
-         echo "Generating release from version ${RELEASE_VERSION}"
-      
+         echo "${CLEAN_PROJECT_VERSION}" >> RELEASE_VERSION
+         echo "Generating release from version $(cat RELEASE_VERSION)"
+
     - name: Prepare & perform release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REGISTRY_PREFFIX: ${{ secrets.REGISTRY_PREFFIX }}
         REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
         REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+        RELEASE_VERSION: $(cat RELEASE_VERSION)
       run: |
-        mvn --batch-mode release:prepare -Pdeployment -Dusername=$GITHUB_ACTOR -Dpassword=$GITHUB_TOKEN
-        mvn --batch-mode release:perform -Pdeployment
+        mvn --batch-mode release:prepare -Dusername=$GITHUB_ACTOR -Dpassword=$GITHUB_TOKEN
+        mvn --batch-mode release:perform 
       
     - name: Create Release
       id: create_release
