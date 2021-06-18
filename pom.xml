@@ -26,6 +26,12 @@
     <geoip2.version>2.15.0</geoip2.version>
     <lombok.version>1.18.20</lombok.version>
   </properties>
+
+  <scm>
+    <developerConnection>scm:git:https://github.com/Verdoso/Airport-Finder</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
