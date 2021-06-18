@@ -35,3 +35,6 @@ jobs:
          echo "${CLEAN_PROJECT_VERSION}" >> RELEASE_VERSION
          echo "NEW_RELEASE_VERSION=${CLEAN_PROJECT_VERSION}" >> $GITHUB_ENV
          echo "Generating release from version ${{ env.NEW_RELEASE_VERSION }}"
+    - name: Show version
+      run: |
+         echo "Generating release from version ${{ env.NEW_RELEASE_VERSION }}"
