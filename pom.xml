@@ -13,7 +13,7 @@
   <artifactId>airport-finder</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>airport-finder</name>
-  <description>Small service to world airports</description>
+  <description>Small service to locate world airports by GeoPosition or IP</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
