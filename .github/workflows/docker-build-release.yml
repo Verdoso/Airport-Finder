@@ -35,6 +35,9 @@ jobs:
     - name: Prepare & perform release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REGISTRY_PREFFIX: ${{ secrets.REGISTRY_PREFFIX }}
+        REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+        REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       run: |
         mvn --batch-mode release:prepare -Pdeployment -Dusername=$GITHUB_ACTOR -Dpassword=$GITHUB_TOKEN
         mvn --batch-mode release:perform -Pdeployment
