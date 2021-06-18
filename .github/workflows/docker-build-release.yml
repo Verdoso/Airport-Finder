@@ -32,5 +32,5 @@ jobs:
          echo "PROJECT_VERSION=${PROJECT_VERSION}"
          echo "CLEAN_PROJECT_VERSION=${PROJECT_VERSION%-SNAPSHOT}"
          CLEAN_PROJECT_VERSION=`echo "${PROJECT_VERSION%-SNAPSHOT}"`
-         echo "RELEASE_VERSION=${CLEAN_PROJECT_VERSION}" >> $GITHUB_ENV
-         echo "Generating release from version ${RELEASE_VERSION}"
+         cat "${CLEAN_PROJECT_VERSION}" > RELEASE_VERSION
+         echo "Generating release from version $(cat RELEASE_VERSION)"
