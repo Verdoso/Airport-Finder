@@ -266,7 +266,7 @@
           <!-- When building to remote we need extra credentials and we publish the release version -->
           <execution>
             <id>BuildToRemote</id>
-            <phase>release</phase>
+            <phase>deploy</phase>
             <goals>
               <goal>build</goal>
             </goals>
