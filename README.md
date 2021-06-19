@@ -35,19 +35,19 @@ Run the following command to patch the secrets with the data:
 `kubectl config set-context --current --namespace=scnfs-demo`
 
 ### Prepare the script to find the pod name to use in commands'
-`POD=$(kubectl get pod -l app=airport-finder -o jsonpath="{.items[0].metadata.name}")`
+`alias findpod='POD=$(kubectl get pod -l app=airport-finder -o jsonpath="{.items[0].metadata.name}")'`
 
 ### Check that the pod and the service are up & running
 `kubectl get all`
 
 ### Check that the pod details
-`kubectl describe po $POD`
+`findpod;kubectl describe po $POD`
 
 ### Check pod logs
-`kubectl logs --follow $POD`
+`findpod;kubectl logs --follow $POD`
 
 ### Open a terminal in the log, in case you need to check things
-`kubectl exec --stdin --tty $POD -- /bin/bash`
+`findpod;kubectl exec --stdin --tty $POD -- /bin/bash`
 
 ### To remove the service and deployment
 `kubectl delete -f airport-finder-deployment.yaml`
