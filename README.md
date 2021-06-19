@@ -51,6 +51,7 @@ Run the following command to patch the secrets with the data:
 
 ### To remove the service and deployment
 `kubectl delete -f airport-finder-deployment.yaml`
+
 `kubectl delete -f airport-finder-service.yaml`
 
 ## Creating the docker image locally
