@@ -21,7 +21,7 @@ public class Airport implements Comparable<Airport> {
 
     public Airport(String line) {
         String[] fields = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-        // Field 0 - Airport ID Unique OpenFlights identifier for this airport.
+        // Field 0 - APIAirport ID Unique OpenFlights identifier for this airport.
         // Field 1 - Name Name of airport. May or may not contain the City name.
         // Field 2 - City Main city served by airport. May be spelled
         // differently from Name.

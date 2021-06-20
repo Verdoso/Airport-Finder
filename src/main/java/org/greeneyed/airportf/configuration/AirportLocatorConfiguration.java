@@ -53,7 +53,7 @@ public class AirportLocatorConfiguration {
         } catch (Exception e) {
             log.error("Error initialising airports from file", e);
         }
-        log.info("Airport locator configured with {} airports.", airports.size());
+        log.info("APIAirport locator configured with {} airports.", airports.size());
         return new AirportLocator(airports, countries, mapperService);
     }
 }

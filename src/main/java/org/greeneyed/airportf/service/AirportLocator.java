@@ -49,6 +49,7 @@ public class AirportLocator {
                 .filter(relativeDistance -> relativeDistance.getDistance().getKilometers() < limitKm)
                 .sorted()
                 .limit(maxAirports)
+                .map(mapperService::from)
                 .collect(Collectors.toList())
                 );
         // @formatter:on
