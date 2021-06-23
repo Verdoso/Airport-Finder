@@ -24,7 +24,7 @@ public class IPLocatorService {
         InetAddress ipAddress = InetAddress.getByName(ip);
         final CityResponse city = webServiceClient.city(ipAddress);
         if(city!=null) {
-            log.info("Found city {}/{} for given ip {}", city.getCountry().getName(), city.getCity().getName(), ipAddress.getHostAddress());
+            log.debug("Found city {}/{} for given ip {}", city.getCountry().getName(), city.getCity().getName(), ipAddress.getHostAddress());
         }
         return city;
     }
