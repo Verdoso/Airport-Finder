@@ -41,7 +41,7 @@ public class LocatorController {
     public ResponseEntity<APIAirportsResponse> locate(@PathVariable(value = "latitude") double latitude,
             @PathVariable(value = "longitude") double longitude,
             @RequestParam(value = "limitKm", required = false, defaultValue = "300") long limitKm,
-            @RequestParam(value = "max", required = false, defaultValue = "5") int max,
+            @RequestParam(value = "max", required = false, defaultValue = "10") int max,
             @RequestParam(value = "withIataCode", required = false, defaultValue = "true") boolean withIataCode) {
         return new ResponseEntity<>(
                 airportLocator.getClosestAirports(new GeoPoint(latitude, longitude), max, limitKm, withIataCode),
@@ -52,7 +52,7 @@ public class LocatorController {
     @RequestMapping(value = "/locate_by_ip/{ip}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIAirportsResponse> locateByIP(@PathVariable(value = "ip") String ip,
             @RequestParam(value = "limitKm", required = false, defaultValue = "300") long limitKm,
-            @RequestParam(value = "max", required = false, defaultValue = "5") int max,
+            @RequestParam(value = "max", required = false, defaultValue = "10") int max,
             @RequestParam(value = "withIataCode", required = false, defaultValue = "true") boolean withIataCode)
             throws IOException, GeoIp2Exception {
         return new ResponseEntity<>(
