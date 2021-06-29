@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.greeneyed</groupId>
   <artifactId>airport-finder</artifactId>
-  <version>0.0.7</version>
+  <version>0.0.8-SNAPSHOT</version>
   <name>airport-finder</name>
   <description>Small service to locate world airports by GeoPosition or IP</description>
   <properties>
@@ -27,7 +27,7 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/Verdoso/Airport-Finder</developerConnection>
-    <tag>v0.0.7</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <dependencies>
