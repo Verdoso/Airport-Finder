@@ -23,6 +23,13 @@
     <summer.version>0.11.4</summer.version>
     <geoip2.version>2.15.0</geoip2.version>
     <lombok.version>1.18.20</lombok.version>
+
+    <!-- agents will be extracted relative to this build location -->
+    <image-extra-root>${project.build.directory}/extra</image-extra-root>
+    <!-- where to place the Java Agents in the container -->
+    <image-agent-location>/opt/agents</image-agent-location>
+
+    <elastic.apm.version>1.24.0</elastic.apm.version>
   </properties>
 
   <scm>
@@ -247,20 +254,55 @@
           <tagNameFormat>v@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+            <execution>
+                <id>download-agent</id>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <stripVersion>true</stripVersion>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>co.elastic.apm</groupId>
+                      <artifactId>elastic-apm-agent</artifactId>
+                      <version>${elastic.apm.version}</version>
+                      <outputDirectory>${image-extra-root}${image-agent-location}</outputDirectory>
+                    </artifactItem>
+                  </artifactItems>
+                </configuration>
+            </execution>
+        </executions>
+      </plugin>
+      
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.1.2</version>
         <configuration>
           <from>
             <image>adoptopenjdk/openjdk16</image>
           </from>
           <container>
             <ports>9999</ports>
+            <jvmFlags>
+              <jvmFlag>-javaagent:${image-agent-location}/elastic-apm-agent.jar</jvmFlag>
+              <jvmFlag>-Delastic.apm.application_packages=org.greeneyed</jvmFlag>
+              <jvmFlag>-Delastic.apm.service_name=${project.artifactId}</jvmFlag>
+              <jvmFlag>-Delastic.apm.server_urls=http://localhost:8200</jvmFlag>
+            </jvmFlags>
           </container>
           <to>
             <image>verdoso/${project.artifactId}:latest</image>
           </to>
+          <extraDirectories>
+            <paths>${image-extra-root}</paths>
+          </extraDirectories>
         </configuration>
         <executions>
           <!-- When building to remote we need extra credentials and we publish the release version -->
